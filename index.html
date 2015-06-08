@@ -1,4 +1,24 @@
 <html>
-<head></head>
-<body></body>
+<head>
+<script type="text/javascript" src="js/knockout.js"></script>
+</head>
+<body>
+First name: <input data-bind='value: firstName' />
+<br/><br/><br/>
+Last Name: <input data-bind='value: lastName' />
+<br/>
+<h2>Hello, <span data-bind="text: fullName"></span>!</h2>
+<script type="text/javascript">
+var ViewModel = function(first,last){
+	this.firstName = ko.observable(first);	
+	this.lastName = ko.observable(last);
+	
+	this.fullName = ko.pureComputed(function(){
+	
+	return this.firstName() + ", " + this.lastName();
+	}, this);
+};
+ko.applyBindings(new ViewModel());
+</script>
+</body>
 </html>
